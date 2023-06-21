@@ -1,0 +1,19 @@
+{
+    "name": "jhonhernandez/prueba_piloto_jhon-david-hernandez",
+    "authors": [
+        {
+            "name": "JhonDavidHernandezCampus",
+            "email": "yonif975@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload":{
+        "psr-4":{
+            "App\\":"app/",
+            "Routes\\":"routes/",
+            "Config\\":"config/"
+
+        }
+    }
+
+}
