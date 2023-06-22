@@ -1,6 +1,6 @@
-RewriteEngine On
-RewriteBase /prueba_piloto_jhonDavidHernandez/
-
-
-RewriteCond %{REQUEST_URI} !^/views/home.html
-RewriteRule ^(.*)$ /views/home.html [L]
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-l
+    RewriteRule ^(.*)$ index.php?ruta=$1 [L,QSA]
+</IfModule>
