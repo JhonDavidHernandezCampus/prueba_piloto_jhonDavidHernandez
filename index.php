@@ -6,7 +6,7 @@ ini_set('display_errors', '1');
 
 require_once './vendor/autoload.php';
 require_once './routes/routes.php';
-use Config\Conexion;
+
 use Dotenv\Dotenv;
 
 

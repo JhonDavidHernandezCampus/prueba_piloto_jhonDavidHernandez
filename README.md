@@ -4,6 +4,9 @@ composer require vlucas/phpdotenv
 composer i
 composer update
 
+
+
+
 Tambien decargamos el gertor de rutas atravez de composer 
 
 ->  composer require bramus/router 1.6

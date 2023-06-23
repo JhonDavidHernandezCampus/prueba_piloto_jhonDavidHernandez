@@ -9,9 +9,7 @@ class Work_referenceController{
             $_DATA = json_decode(file_get_contents('php://input'), true);
             $obj = new Work_referenceModel($_DATA['id'], $_DATA['full_name'], $_DATA['cel_number'], $_DATA['position'], $_DATA['company']);
             $datos = $obj->postWork_reference();
-            print_r($datos);
-
-
+            print_r( ["Stado"=> 200, "Mensage"=> "Se ha agregado el dato"]);
         } catch (\Throwable $th) {
             echo $th->getMessage();
         }
@@ -22,17 +20,38 @@ class Work_referenceController{
     public function updateWork_reference(){
         try {
             $_DATA = json_decode(file_get_contents('php://input'), true);
-        $obj = new Work_referenceModel($_DATA['id'],$_DATA['full_name'],$_DATA['cel_number'],$_DATA['position'],$_DATA['company']);
-        $datos = $obj->updateWork_reference();
-        print_r($datos);
-        echo $_DATA['cel_number'];
-        echo $_DATA['full_name'];
+            $obj = new Work_referenceModel($_DATA['id'],$_DATA['full_name'],$_DATA['cel_number'],$_DATA['position'],$_DATA['company']);
+            $datos = $obj->updateWork_reference();
+            print_r( ["Stado"=> 200, "Mensage"=> "Se ha actualizado el dato"]);
         } catch (\Throwable $th) {
             echo $th->getMessage();
         }
     }
 
+    //funcion para obtener todos los registros 
+    public function getWork_reference(){
+        try {
+            $_DATA = json_decode(file_get_contents('php://input'), true);
+            $obj = new Work_referenceModel();
+            $datos = $obj->getWork_reference();
+            print_r( ["Stado"=> 200, "Mensage"=> "Se muestran todos los datos de la tabla"]);
+            echo $datos;
+        } catch (\Throwable $th) {
+            echo $th->getMessage();
+        }
+    }
 
+    //funcion para eliminar un registro por su id
+    public function deleteWork_reference(){
+        try {
+            $_DATA = json_decode(file_get_contents('php://input'), true);
+            $obj = new Work_referenceModel($_DATA['id']);
+            $datos = $obj->deleteWork_reference();
+            print_r( ["Stado"=> 200, "Mensage"=> "Se ha Eliminado el dato"]);
+        } catch (\Throwable $th) {
+            echo $th->getMessage();
+        }
+    }
 
 }
 ?>
