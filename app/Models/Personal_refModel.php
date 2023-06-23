@@ -34,9 +34,54 @@ class Personal_refModel{
 
     public function postPersonal_ref(){
         try {
-            
-        } catch (\Throwable $th) {
-            //throw $th;
+            $conx = new Conexion;
+            $query = 'INSERT INTO personal_ref(id,full_name,cel_number,relationship,occupation) VALUES (:id,:name,:cel,:relations,:occupation)';
+            $res = $conx->connect()->prepare($query);
+            $res->bindValue('id',$this->id);
+            $res->bindValue('name', $this->full_name);
+            $res->bindValue('cel', $this->cel_number);
+            $res->bindValue('relations', $this->relationship);
+            $res->bindValue('occupation', $this->occupation);
+            $res->execute();
+            $this->message =["Code"=> 200, "Message"=> $res->fetchAll(PDO::FETCH_ASSOC)];
+        } catch (\PDOException $e) {
+            $this->message = ["Code"=> $e->getCode(), "Message"=> $res->errorInfo()[2]];
+        }finally{
+            print_r($this->message);
+        }
+    }
+
+    public function updatePersonal_ref(){
+        try {
+            $conx = new Conexion;
+            $query = 'UPDATE personal_ref SET id=:id,full_name=:name,cel_number=:cel,relationship=:relations,occupation=:occupation WHERE id=:id';
+            $res = $conx->connect()->prepare($query);
+            $res->bindValue('id',$this->id);
+            $res->bindValue('name', $this->full_name);
+            $res->bindValue('cel', $this->cel_number);
+            $res->bindValue('relations', $this->relationship);
+            $res->bindValue('occupation', $this->occupation);
+            $res->execute();
+            $this->message =["Code"=> 200, "Message"=> $res->fetchAll(PDO::FETCH_ASSOC)];
+        } catch (\PDOException $e) {
+            $this->message = ["Code"=> $e->getCode(), "Message"=> $res->errorInfo()[2]];
+        }finally{
+            print_r($this->message);
+        }
+    }
+
+    public function deletePersonal_ref(){
+        try {
+            $conx = new Conexion;
+            $query = 'DELETE FROM personal_ref WHERE id=:id';
+            $res = $conx->connect()->prepare($query);
+            $res->bindValue('id',$this->id);
+            $res->execute();
+            $this->message =["Code"=> 200, "Message"=> $res->fetchAll(PDO::FETCH_ASSOC)];
+        } catch (\PDOException $e) {
+            $this->message = ["Code"=> $e->getCode(), "Message"=> $res->errorInfo()[2]];
+        }finally{
+            print_r($this->message);
         }
     }
 }
