@@ -9,8 +9,9 @@ class Team_educatorsController{
         try {
             $obj = new Team_educatorsModel();
             $res = $obj->getTeam_educators();
-            print_r( ["Stado"=> 200, "Mensage"=> "Se muestras los datos"]);
+            //print_r( ["Stado"=> 200, "Mensage"=> "Se muestras los datos"]);
             print_r($res);
+            return $res;
         } catch (\Throwable $th) {
             echo $th->getMessage();
         }

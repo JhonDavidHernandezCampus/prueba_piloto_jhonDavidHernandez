@@ -9,8 +9,9 @@ class LevelsController{
         try {
             $obj = new LevelsModel();
             $res = $obj->getLevels();
-            print_r( ["Stado"=> 200, "Mensage"=> "Se muestras los datos"]);
+            //print_r( ["Stado"=> 200, "Mensage"=> "Se muestras los datos"]);
             print_r($res);
+            return $res;
         } catch (\Throwable $th) {
             echo $th->getMessage();
         }

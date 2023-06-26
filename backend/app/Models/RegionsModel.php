@@ -1,26 +1,24 @@
 <?php
 namespace App\Models;
-use App\Controllers\Emergency_contactController;
-use Config\Conexion;
-use Home\getInstance;
-use PDO;
 
-class Emergency_contactModel{
+use Config\Conexion;
+use PDO;
+use Home\getInstance;
+
+class RegionsModel{
     use getInstance;
     public $message;
-    public function __construct(private $id=1,public $id_staff=1,private $cel_number=1,public $relationship =1,public $full_name=1,public $email=1) {
+
+    public function __construct(private $id=1,public $name_region=1, private $id_country=1) {
         $this->id = $id;
-        $this->id_staff = $id_staff;
-        $this->cel_number = $cel_number;
-        $this->relationship = $relationship;
-        $this->full_name = $full_name;
-        $this->email = $email;
+        $this->name_region = $name_region;
+        $this->id_country = $id_country;
     }
 
-    public function getEmergency_contact(){
+    public function getRegions(){
         try {
             $conx = new Conexion;
-            $query = 'SELECT * FROM emergency_contact';
+            $query = 'SELECT  regions.id AS id_regions,countries.*, regions.name_region FROM countries INNER JOIN regions ON countries.id = regions.id_country;';
             $res = $conx->connect()->prepare($query);
             $res->execute();
             return json_encode($res->fetchAll(PDO::FETCH_ASSOC));
@@ -33,17 +31,14 @@ class Emergency_contactModel{
         }
     }
 
-    public function postEmergency_contact(){
+    public function postRegions(){
         try {
             $conx = new Conexion;
-            $query = 'INSERT INTO emergency_contact(id,id_staff,cel_number,relationship,full_name,email) VALUES (:id,:id_staff,:cel,:relations,:name,:email)';
+            $query = 'INSERT INTO regions(id,name_region,id_country) VALUES (:id,:name_region,:id_country)';
             $res = $conx->connect()->prepare($query);
             $res->bindValue('id',$this->id);
-            $res->bindValue('id_staff',$this->id_staff);
-            $res->bindValue('cel', $this->cel_number);
-            $res->bindValue('relations', $this->relationship);
-            $res->bindValue('name', $this->full_name);
-            $res->bindValue('email', $this->email);
+            $res->bindValue('name_region', $this->name_region);
+            $res->bindValue('id_country', $this->id_country);
             $res->execute();
             $this->message =["Code"=> 200, "Message"=> $res->fetchAll(PDO::FETCH_ASSOC)];
         } catch (\PDOException $e) {
@@ -53,16 +48,14 @@ class Emergency_contactModel{
         }
     }
 
-    public function updateEmergency_contact(){
+    public function updateRegions(){
         try {
             $conx = new Conexion;
-            $query = 'UPDATE emergency_contact SET id=:id,full_name=:name,cel_number=:cel,relationship=:relations,occupation=:occupation WHERE id=:id';
+            $query = 'UPDATE regions SET id=:id,name_region=:name_region, id_country=:id_country WHERE id=:id';
             $res = $conx->connect()->prepare($query);
             $res->bindValue('id',$this->id);
-            $res->bindValue('name', $this->full_name);
-            $res->bindValue('cel', $this->cel_number);
-            $res->bindValue('relations', $this->relationship);
-            $res->bindValue('occupation', $this->occupation);
+            $res->bindValue('name_region', $this->name_region);
+            $res->bindValue('id_country', $this->id_country);
             $res->execute();
             $this->message =["Code"=> 200, "Message"=> $res->fetchAll(PDO::FETCH_ASSOC)];
         } catch (\PDOException $e) {
@@ -72,10 +65,10 @@ class Emergency_contactModel{
         }
     }
 
-    public function deleteEmergency_contact(){
+    public function deleteRegions(){
         try {
             $conx = new Conexion;
-            $query = 'DELETE FROM emergency_contact WHERE id=:id';
+            $query = 'DELETE FROM regions WHERE id=:id';
             $res = $conx->connect()->prepare($query);
             $res->bindValue('id',$this->id);
             $res->execute();

@@ -1,13 +1,13 @@
 <?php
 namespace App\Controllers;
-use App\Models\LocationsModel;
+use App\Models\RegionsModel;
 
-class LocationsController{
+class RegionsController{
 
-    public function getLocations(){
+    public function getRegions(){
         try {
-            $obj = new LocationsModel();
-            $res = $obj->getLocaltions();
+            $obj = new RegionsModel();
+            $res = $obj->getRegions();
             //print_r( ["Stado"=> 200, "Mensage"=> "Se muestras los datos"]);
             print_r($res);
             return $res;
@@ -16,32 +16,32 @@ class LocationsController{
         }
     }
 
-    public function postLocations(){
+    public function postRegions(){
         try {
             $_DATA = json_decode(file_get_contents('php://input'), true);
-            $obj = new LocationsModel($_DATA['id'],$_DATA['name_location']);
-            $res = $obj->postLocaltions();
+            $obj = new RegionsModel($_DATA['id'],$_DATA['name_region'],$_DATA['id_country']);
+            $res = $obj->postRegions();
             print_r( ["Stado"=> 200, "Mensage"=> "Se ha agregado el dato"]);
         } catch (\Throwable $th) {
             echo $th->getMessage();
         }
     }
-    public function updateLocations(){
+    public function updateRegions(){
         try {
             $_DATA = json_decode(file_get_contents('php://input'), true);
-            $obj = new LocationsModel($_DATA['id'],$_DATA['name_location']);
-            $res = $obj->updateLocaltions();
+            $obj = new RegionsModel($_DATA['id'],$_DATA['name_region'],$_DATA['id_country']);
+            $res = $obj->updateRegions();
             print_r( ["Stado"=> 200, "Mensage"=> "Se ha actualizado el dato"]);
         } catch (\Throwable $th) {
             echo $th->getMessage();
         }
     }
 
-    public function deleteLocations(){
+    public function deleteRegions(){
         try {
             $_DATA = json_decode(file_get_contents('php://input'), true);
-            $obj = new LocationsModel($_DATA['id']);
-            $res = $obj->deleteLocaltions();
+            $obj = new RegionsModel($_DATA['id']);
+            $res = $obj->deleteRegions();
             print_r( ["Stado"=> 200, "Mensage"=> "Se ha eliminado el dato"]);
         } catch (\Throwable $th) {
             echo $th->getMessage();

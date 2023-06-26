@@ -9,8 +9,9 @@ class Emergency_contactController{
         try {
             $obj = new Emergency_contactModel();
             $res = $obj->getEmergency_contact();
-            print_r( ["Stado"=> 200, "Mensage"=> "Se muestras los datos"]);
+            //print_r( ["Stado"=> 200, "Mensage"=> "Se muestras los datos"]);
             print_r($res);
+            return $res;
         } catch (\Throwable $th) {
             echo $th->getMessage();
         }

@@ -65,20 +65,13 @@ $router->mount('/api/locations', function() use($router){
     $router->delete('/delete','App\Controllers\LocationsController@deleteLocations');
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//Rutas para la tabla Regions
+$router->mount('/api/regions', function() use($router){
+    $router->get('/get','App\Controllers\RegionsController@getRegions');
+    $router->post('/post','App\Controllers\RegionsController@postRegions');
+    $router->put('/put','App\Controllers\RegionsController@updateRegions');
+    $router->delete('/delete','App\Controllers\RegionsController@deleteRegions');
+});
 
 
 

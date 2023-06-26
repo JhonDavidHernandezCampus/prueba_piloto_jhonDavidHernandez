@@ -22,8 +22,8 @@ class Personal_refModel{
             $query = 'SELECT * FROM personal_ref';
             $res = $conx->connect()->prepare($query);
             $res->execute();
+            return json_encode($res->fetchAll(PDO::FETCH_ASSOC));
             $this->message =["Code"=> 200, "Message"=> $res->fetchAll(PDO::FETCH_ASSOC)];
-            return $res;
             $conx->desconet();
         } catch (\PDOException $e) {
             $this->message = ["Code"=> $e->getCode(), "Message"=> $res->errorInfo()[2]];

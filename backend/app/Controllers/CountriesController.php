@@ -9,8 +9,9 @@ class CountriesController{
         try {
             $obj = new CountriesModel();
             $res = $obj->getCountries();
-            print_r( ["Stado"=> 200, "Mensage"=> "Se muestras los datos"]);
+            //print_r( ["Stado"=> 200, "Mensage"=> "Se muestras los datos"]);
             print_r($res);
+            return $res;
         } catch (\Throwable $th) {
             echo $th->getMessage();
         }

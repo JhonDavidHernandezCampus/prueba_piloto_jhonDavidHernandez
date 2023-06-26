@@ -5,26 +5,23 @@ use Config\Conexion;
 use PDO;
 use Home\getInstance;
 
-class LocaltionsModel{
+class LocationsModel{
     use getInstance;
     public $message;
 
-    public function __construct(private $id=1,public $full_name=1,private $cel_number=1,public $relationship =1,public $occupation=1) {
+    public function __construct(private $id=1,public $name_location=1) {
         $this->id = $id;
-        $this->full_name = $full_name;
-        $this->cel_number = $cel_number;
-        $this->relationship = $relationship;
-        $this->occupation = $occupation;
+        $this->name_location = $name_location;
     }
 
-    public function getPersonal_ref(){
+    public function getLocaltions(){
         try {
             $conx = new Conexion;
-            $query = 'SELECT * FROM personal_ref';
+            $query = 'SELECT * FROM locations';
             $res = $conx->connect()->prepare($query);
             $res->execute();
+            return json_encode($res->fetchAll(PDO::FETCH_ASSOC));
             $this->message =["Code"=> 200, "Message"=> $res->fetchAll(PDO::FETCH_ASSOC)];
-            return $res;
             $conx->desconet();
         } catch (\PDOException $e) {
             $this->message = ["Code"=> $e->getCode(), "Message"=> $res->errorInfo()[2]];
@@ -33,16 +30,13 @@ class LocaltionsModel{
         }
     }
 
-    public function postPersonal_ref(){
+    public function postLocaltions(){
         try {
             $conx = new Conexion;
-            $query = 'INSERT INTO personal_ref(id,full_name,cel_number,relationship,occupation) VALUES (:id,:name,:cel,:relations,:occupation)';
+            $query = 'INSERT INTO locations(id,name_location) VALUES (:id,:name_location)';
             $res = $conx->connect()->prepare($query);
             $res->bindValue('id',$this->id);
-            $res->bindValue('name', $this->full_name);
-            $res->bindValue('cel', $this->cel_number);
-            $res->bindValue('relations', $this->relationship);
-            $res->bindValue('occupation', $this->occupation);
+            $res->bindValue('name_location', $this->name_location);
             $res->execute();
             $this->message =["Code"=> 200, "Message"=> $res->fetchAll(PDO::FETCH_ASSOC)];
         } catch (\PDOException $e) {
@@ -52,16 +46,13 @@ class LocaltionsModel{
         }
     }
 
-    public function updatePersonal_ref(){
+    public function updateLocaltions(){
         try {
             $conx = new Conexion;
-            $query = 'UPDATE personal_ref SET id=:id,full_name=:name,cel_number=:cel,relationship=:relations,occupation=:occupation WHERE id=:id';
+            $query = 'UPDATE locations SET id=:id,name_location=:name_location WHERE id=:id';
             $res = $conx->connect()->prepare($query);
             $res->bindValue('id',$this->id);
-            $res->bindValue('name', $this->full_name);
-            $res->bindValue('cel', $this->cel_number);
-            $res->bindValue('relations', $this->relationship);
-            $res->bindValue('occupation', $this->occupation);
+            $res->bindValue('name_location', $this->name_location);
             $res->execute();
             $this->message =["Code"=> 200, "Message"=> $res->fetchAll(PDO::FETCH_ASSOC)];
         } catch (\PDOException $e) {
@@ -71,10 +62,10 @@ class LocaltionsModel{
         }
     }
 
-    public function deletePersonal_ref(){
+    public function deleteLocaltions(){
         try {
             $conx = new Conexion;
-            $query = 'DELETE FROM personal_ref WHERE id=:id';
+            $query = 'DELETE FROM locations WHERE id=:id';
             $res = $conx->connect()->prepare($query);
             $res->bindValue('id',$this->id);
             $res->execute();

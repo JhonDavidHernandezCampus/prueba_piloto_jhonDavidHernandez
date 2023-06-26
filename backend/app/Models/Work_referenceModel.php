@@ -66,8 +66,8 @@ class Work_referenceModel{
             $query = 'SELECT * FROM work_reference';
             $res = $conx->connect()->prepare($query);
             $res->execute();
+            return json_encode($res->fetchAll(PDO::FETCH_ASSOC));
             $this->message = ["Code"=> 200, "Message"=> $res->fetchAll(PDO::FETCH_ASSOC)];
-            return $res;
         } catch (\PDOException $e) {
             echo "Error en la insercion de datos" . $e;
             $this->message = ["Code"=> $e->getCode(), "Message"=> $res->errorInfo()[2]];

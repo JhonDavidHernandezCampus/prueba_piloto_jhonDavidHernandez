@@ -28,7 +28,6 @@ class Conexion{
         try {
             $this->conx = new PDO("mysql:host=$this->host;dbname=$this->dbname",$this->user, $this->password);
             $this->conx->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $this->message = ["Code"=> 200, "Message"=> "Se ha conectado "];
             return $this->conx;
         } catch (\PDOException $e) {
             $this->message = ["Code"=> "error", "Message"=> "Error al copnectarse"];

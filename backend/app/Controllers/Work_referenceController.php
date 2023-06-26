@@ -15,7 +15,6 @@ class Work_referenceController{
         }
     }
 
-
     //funcion de actualizar
     public function updateWork_reference(){
         try {
@@ -34,8 +33,9 @@ class Work_referenceController{
             $_DATA = json_decode(file_get_contents('php://input'), true);
             $obj = new Work_referenceModel();
             $datos = $obj->getWork_reference();
-            print_r( ["Stado"=> 200, "Mensage"=> "Se muestran todos los datos de la tabla"]);
-            echo $datos;
+            //print_r( ["Stado"=> 200, "Mensage"=> "Se muestran todos los datos de la tabla"]);
+            print_r( $datos);
+            return $datos;
         } catch (\Throwable $th) {
             echo $th->getMessage();
         }

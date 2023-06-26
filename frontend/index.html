@@ -4,9 +4,13 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+
 	<link rel="stylesheet" href="style.css">
+	<script src="app.js" type="module" defer></script>
 	<script src="main.js" async></script>
-	<script src="app.js" defer type="module"></script>
 	<title>AdminSite</title>
 </head>
 <body>
@@ -122,8 +126,37 @@
 					<div class="head">
 						<h3>Sales Report</h3>
 					</div>
-					<!-- conteido -->
-					<h1>Hola Mundo</h1>
+						<form action="" class="accions" id=" ">
+							<div>
+								<label for="">Ingrese la accion que desea realizar:</label><br>
+								<select name="accion" class="form-select w-100" id="" >
+									<option value="" selected="true" disabled>-Accion-</option>
+									<option value="get">GET</option>
+									<option value="post">POST</option>
+									<option value="put">PUT</option>
+									<option value="delete">UPDATE</option>
+								</select>
+							</div>
+							<div>
+								<label for="">Que tabla desea usar:</label>
+								<select name="tabla" class="form-select w-100" id="">
+									<option value="" selected="true" disabled>-Elija la tabla-</option>
+									<option value="countries">Countries</option>
+									<option value="work_reference">Work_reference</option>
+									<option value="personal_ref">Personal_ref</option>
+									<option value="routes">Routes</option>
+									<option value="team_educators">Team_educators</option>
+									<option value="levels">Levels</option>
+									<option value="locations">Locations</option>
+									<option value="regions">Regions</option>
+									<option value="emergency_contact">Emergency_contact</option>
+								</select>
+							</div>
+							<input type="submit" class="btn btn-primary">
+						</form>
+						
+
+
 				</div>
 			
 			</div>
